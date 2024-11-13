@@ -2,7 +2,7 @@
 
 ## Installation
 
-To install this package, import `url` in SPM.
+To install this package, import `https://github.com/appDeveloper7/MySwiftPackage.git` in SPM.
 
 ## Usage example
 

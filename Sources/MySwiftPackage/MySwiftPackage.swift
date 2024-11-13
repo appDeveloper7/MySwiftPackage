@@ -5,6 +5,7 @@
 import SwiftUI
 
 @available(macOS 10.15, *)
+@available(iOS 13, *)
 extension View {
     public func addRoundedBorder() -> some View {
         self

@@ -9,6 +9,10 @@ import SwiftUI
 extension View {
     public func addRoundedBorder() -> some View {
         self
+            .roundedBorder()
+    }
+    internal func roundedBorder() -> some View {
+        self
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(.gray, lineWidth: 2)

@@ -6,16 +6,38 @@ import SwiftUI
 
 @available(macOS 10.15, *)
 @available(iOS 13, *)
-extension View {
-    public func addRoundedBorder() -> some View {
-        self
-            .roundedBorder()
+
+// Protocol defining the rounded border functionality
+public protocol MySwiftPackage: View {
+    var cornerRadius: CGFloat { get }
+    var borderColor: Color { get }
+    var borderWidth: CGFloat { get }
+}
+
+@available(macOS 10.15, *)
+@available(iOS 13, *)
+// Extension to implement the view modifier for rounding and adding a border
+public extension MySwiftPackage {
+    func withRoundedBorder() -> some View {
+        self.modifier(RoundedBorderViewImpl(cornerRadius: cornerRadius, borderColor: borderColor, borderWidth: borderWidth))
     }
-    internal func roundedBorder() -> some View {
-        self
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(.gray, lineWidth: 2)
+}
+
+@available(macOS 10.15, *)
+@available(iOS 13, *)
+// Private implementation of the modifier (hidden from users of the package)
+private struct RoundedBorderViewImpl: ViewModifier {
+    var cornerRadius: CGFloat
+    var borderColor: Color
+    var borderWidth: CGFloat
+    
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(borderColor, lineWidth: borderWidth)
             )
+            .cornerRadius(cornerRadius)
     }
 }
